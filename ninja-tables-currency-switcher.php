@@ -119,65 +119,7 @@ class NinjaTablesCurrencySwitcher {
                     });
                 });
 
-                return;
-                
-                var rate = jQuery('.usd_changer').data('rate');
-
-                function pushValues($tableId, $target, callback) {
-                    if(alreadyAddedBase) {
-                        // callback();
-                        return;
-                    }
-                    //Do your thing
-                    callback();
-                }
-                const formatter = new Intl.NumberFormat('en-US', {
-                    style: 'currency',
-                    currency: 'USD',
-                    minimumFractionDigits: 2
-                });
-
-                $('.usd_changer').on('click', function(e) {
-                    e.preventDefault();
-                    for (var i = 0; i < target.length; i++ ) {
-                        var targetClass = ' .'+target[i];
-                        pushValues(table_id, targetClass, function() {
-                            var allRows = jQuery('tbody' + targetClass );
-                            jQuery.each(allRows, function(index, $row) {
-                                var originalValue = jQuery($row).text();
-                                var newValue = originalValue.replace('€', '');
-                                newValue = newValue.split('.').join('');
-                                newValue = parseInt(newValue, 10)*rate;
-                                newValue = formatter.format(newValue);
-                                jQuery($row).attr('data-original_value', originalValue).text(newValue);
-                            });
-                        });
-                    }
-                    alreadyAddedBase = true;
-                });
-
-                $('.gbp_changer').on('click', function(e) {
-                    e.preventDefault();
-                    for (var i = 0; i < target.length; i++ ) {
-                        var targetClass = ' .'+target[i];
-                        var allRows = jQuery('tbody'+targetClass);
-                        jQuery.each(allRows, function(index, $row) {
-                            $gbp = jQuery($row).data('original_value');
-                            jQuery($row).text($gbp);
-                        });
-                    }
-                    alreadyAddedBase = false;
-
-                });
-
             });
-
-			<?php
-				$js = '';
-				$js .= 'var sayHi = "Hello There";';
-				$js .= 'console.log(sayHi);';
-				echo sanitize_text_field($js);
-			?>
 		</script>
 		<?php
 	}
